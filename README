@@ -1,0 +1,12 @@
+The main() is in test.java.  It will run a command shell.  type help for the list of commands.
+
+you can create new RSA keys,
+reuse old RSA keys (if you remembered to write it down!),
+recover private RSA Keys from public Keys using Pollards Rho (for short keys anyway),
+encrypt and decrypt messages,
+create an MD5 hash of a message,
+sign an MD5 hash of a message.
+
+
+
+
