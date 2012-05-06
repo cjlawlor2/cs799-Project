@@ -12,6 +12,7 @@ public class test
 										"exit",
 										"myKey",
 										"caKey",
+										"forgersKey",
 										"newRSAKey",
 										"oldRSAKey",
 										"recoverRSAPrivateKey",
@@ -26,6 +27,7 @@ public class test
 												"exit", 
 												"print out myKey",
 												"print out caKey",
+												"print out forgersKey",
 												"generate new RSA Keys", 
 												"reuse existing RSA Keys", 
 												"attack an RSA Public Key", 
@@ -52,6 +54,7 @@ public class test
 	
 	static RSA myKey = null;
 	static RSA caKey = null;
+	static RSA forgersKey = null;
 	static RSA signersKey = null;
 	static MD5Hash hasher = new MD5Hash();
 	
@@ -75,7 +78,16 @@ public class test
 		if (response.startsWith("y")||response.startsWith("Y"))
 		{
 			caKey = k;
-		}	
+		}
+		
+		do {
+			response = c.readLine("Set forgersKey?: ");
+		} while (!response.startsWith("y")&&!response.startsWith("Y")&&!response.startsWith("n")&&!response.startsWith("N"));
+		
+		if (response.startsWith("y")||response.startsWith("Y"))
+		{
+			forgersKey = k;
+		}
 	}
 	
 	public static RSA chooseKey(InputHelper c)
@@ -97,6 +109,15 @@ public class test
 		if (response.startsWith("y")||response.startsWith("Y"))
 		{
 			return caKey;
+		}
+		
+		do {
+			response = c.readLine("use forgersKey?: ");
+		} while (!response.startsWith("y")&&!response.startsWith("Y")&&!response.startsWith("n")&&!response.startsWith("N"));
+		
+		if (response.startsWith("y")||response.startsWith("Y"))
+		{
+			return forgersKey;
 		}
 		return null;
 	}
@@ -152,7 +173,19 @@ public class test
             			caKey.printKeys();
             		}
             	}
-
+            	
+            	else if (command.startsWith("for"))
+            	{
+            		if (forgersKey==null)
+            		{
+            			System.out.println("forgersKey is (null)");
+            		}
+            		else
+            		{
+            			forgersKey.printKeys();
+            		}
+            	}
+            	
             	else if (command.startsWith("new"))
             	{	
             		RSA newRSA = new RSA();
